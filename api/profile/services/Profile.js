@@ -10,13 +10,14 @@
 const _ = require('lodash');
 
 module.exports = {
+
   /**
    * Promise to fetch all profiles.
    *
    * @return {Promise}
    */
 
-  fetchAll: params => {
+  fetchAll: (params) => {
     // Convert `params` object to filters compatible with Mongo.
     const filters = strapi.utils.models.convertParams('profile', params);
     // Select field to populate.
@@ -25,7 +26,8 @@ module.exports = {
       .map(ast => ast.alias)
       .join(' ');
 
-    return Profile.find()
+    return Profile
+      .find()
       .where(filters.where)
       .sort(filters.sort)
       .skip(filters.start)
@@ -39,16 +41,16 @@ module.exports = {
    * @return {Promise}
    */
 
-  fetch: params => {
+  fetch: (params) => {
     // Select field to populate.
     const populate = Profile.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Profile.findOne(
-      _.pick(params, _.keys(Profile.schema.paths))
-    ).populate(populate);
+    return Profile
+      .findOne(_.pick(params, _.keys(Profile.schema.paths)))
+      .populate(populate);
   },
 
   /**
@@ -57,11 +59,13 @@ module.exports = {
    * @return {Promise}
    */
 
-  count: params => {
+  count: (params) => {
     // Convert `params` object to filters compatible with Mongo.
     const filters = strapi.utils.models.convertParams('profile', params);
 
-    return Profile.countDocuments().where(filters.where);
+    return Profile
+      .countDocuments()
+      .where(filters.where);
   },
 
   /**
@@ -70,12 +74,9 @@ module.exports = {
    * @return {Promise}
    */
 
-  add: async values => {
+  add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(
-      values,
-      Profile.associations.map(ast => ast.alias)
-    );
+    const relations = _.pick(values, Profile.associations.map(ast => ast.alias));
     const data = _.omit(values, Profile.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
@@ -100,9 +101,7 @@ module.exports = {
     const entry = await Profile.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Profile.updateRelations(
-      Object.assign(params, { values: relations })
-    );
+    return Profile.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
@@ -120,7 +119,9 @@ module.exports = {
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Profile.findOneAndRemove(params, {}).populate(populate);
+    const data = await Profile
+      .findOneAndRemove(params, {})
+      .populate(populate);
 
     if (!data) {
       return data;
@@ -132,23 +133,13 @@ module.exports = {
           return true;
         }
 
-        const search =
-          _.endsWith(association.nature, 'One') ||
-          association.nature === 'oneToMany'
-            ? { [association.via]: data._id }
-            : { [association.via]: { $in: [data._id] } };
-        const update =
-          _.endsWith(association.nature, 'One') ||
-          association.nature === 'oneToMany'
-            ? { [association.via]: null }
-            : { $pull: { [association.via]: data._id } };
+        const search = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: data._id } : { [association.via]: { $in: [data._id] } };
+        const update = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: null } : { $pull: { [association.via]: data._id } };
 
         // Retrieve model.
-        const model = association.plugin
-          ? strapi.plugins[association.plugin].models[
-              association.model || association.collection
-            ]
-          : strapi.models[association.model || association.collection];
+        const model = association.plugin ?
+          strapi.plugins[association.plugin].models[association.model || association.collection] :
+          strapi.models[association.model || association.collection];
 
         return model.update(search, update, { multi: true });
       })
@@ -163,7 +154,7 @@ module.exports = {
    * @return {Promise}
    */
 
-  search: async params => {
+  search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
     const filters = strapi.utils.models.convertParams('profile', params);
     // Select field to populate.
@@ -197,7 +188,8 @@ module.exports = {
       }
     }, []);
 
-    return Profile.find({ $or })
+    return Profile
+      .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)
       .limit(filters.limit)

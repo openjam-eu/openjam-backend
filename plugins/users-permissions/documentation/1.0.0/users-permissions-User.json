@@ -1166,10 +1166,7 @@
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "handle",
-                "type",
-                "name"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -1178,92 +1175,8 @@
                 "handle": {
                   "type": "string"
                 },
-                "profilePicture": {
-                  "type": "string"
-                },
                 "user": {
                   "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "styles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "bio": {
-                  "type": "string"
-                },
-                "isPrivate": {
-                  "type": "boolean"
-                },
-                "coverPicture": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                },
-                "bioShort": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "subscriptions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subscribers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
                 }
               }
             }
