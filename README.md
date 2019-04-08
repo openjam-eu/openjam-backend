@@ -1,3 +1,3 @@
-# strapi-app
+# openjam-backend
 
-A quick description of strapi-app.
+A quick description of openjam-backend.

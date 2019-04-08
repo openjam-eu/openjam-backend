@@ -2,20 +2,18 @@
   "defaultConnection": "default",
   "connections": {
     "default": {
+      "connector": "strapi-hook-mongoose",
       "settings": {
         "client": "mongo",
-        "host": "db",
-        "srv": false,
-        "port": "27017",
-        "database": "strapi",
-        "username": "",
-        "password": ""
+        "host": "ds229438.mlab.com",
+        "port": "29438",
+        "database": "heroku_6kp17k0v",
+        "username": "heroku_6kp17k0v",
+        "password": "26efshc7kjae3v5u0gvk0q15d2"
       },
       "options": {
-        "authenticationDatabase": "strapi",
-        "ssl": false
-      },
-      "connector": "strapi-hook-mongoose"
+        "authenticationDatabase": "heroku_6kp17k0v"
+      }
     }
   }
 }
