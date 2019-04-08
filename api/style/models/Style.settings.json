@@ -1,0 +1,27 @@
+{
+  "connection": "default",
+  "collectionName": "style",
+  "info": {
+    "name": "style",
+    "description": "Music styles"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "profiles": {
+      "collection": "profile",
+      "via": "styles"
+    }
+  }
+}

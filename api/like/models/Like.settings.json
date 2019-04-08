@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "like",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "emotion": {
+      "enum": [
+        "like",
+        "love",
+        "haha",
+        "wow",
+        "sad",
+        "angry"
+      ],
+      "default": "like",
+      "type": "enumeration",
+      "required": true
+    },
+    "intensity": {
+      "default": 5,
+      "max": 10,
+      "type": "integer",
+      "required": true
+    },
+    "profile": {
+      "model": "profile",
+      "via": "likes"
+    },
+    "track": {
+      "model": "track",
+      "via": "likes"
+    },
+    "post": {
+      "model": "post",
+      "via": "likes"
+    }
+  }
+}

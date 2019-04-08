@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "label",
+  "info": {
+    "name": "label",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "tracks": {
+      "collection": "track",
+      "via": "label"
+    },
+    "profiles": {
+      "collection": "profile",
+      "via": "labels"
+    },
+    "description": {
+      "default": "",
+      "maxLength": 2000,
+      "type": "string"
+    }
+  }
+}

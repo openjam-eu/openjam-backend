@@ -1,0 +1,121 @@
+{
+  "connection": "default",
+  "collectionName": "profile",
+  "info": {
+    "name": "profile",
+    "description": "Personal and artists profiles"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "handle": {
+      "default": "",
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "profilePicture": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "user": {
+      "model": "user",
+      "via": "profiles",
+      "plugin": "users-permissions"
+    },
+    "likes": {
+      "collection": "like",
+      "via": "profile"
+    },
+    "type": {
+      "default": "listener",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "listener",
+        "artist",
+        "merchant"
+      ]
+    },
+    "posts": {
+      "collection": "post",
+      "via": "profile"
+    },
+    "tracks": {
+      "collection": "track",
+      "via": "profiles"
+    },
+    "labels": {
+      "collection": "label",
+      "dominant": true,
+      "via": "profiles"
+    },
+    "name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "styles": {
+      "collection": "style",
+      "via": "profiles",
+      "dominant": true
+    },
+    "latitude": {
+      "default": "",
+      "type": "float"
+    },
+    "longitude": {
+      "default": "",
+      "type": "float"
+    },
+    "bio": {
+      "default": "",
+      "maxLength": 2000,
+      "type": "text"
+    },
+    "isPrivate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "coverPicture": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "city": {
+      "default": "",
+      "type": "string"
+    },
+    "country": {
+      "default": "",
+      "type": "string"
+    },
+    "bioShort": {
+      "default": "",
+      "maxLength": 300,
+      "type": "string"
+    },
+    "state": {
+      "default": "",
+      "maxLength": 50,
+      "type": "string"
+    },
+    "subscriptions": {
+      "collection": "profile",
+      "via": "subscribers",
+      "dominant": true
+    },
+    "subscribers": {
+      "collection": "profile",
+      "via": "subscriptions"
+    },
+    "comments": {
+      "collection": "comment",
+      "via": "by"
+    }
+  }
+}
