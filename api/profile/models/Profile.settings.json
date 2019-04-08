@@ -11,12 +11,110 @@
   "attributes": {
     "handle": {
       "default": "",
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "user": {
       "model": "user",
       "via": "profiles",
       "plugin": "users-permissions"
+    },
+    "comments": {
+      "collection": "comment",
+      "via": "by"
+    },
+    "styles": {
+      "collection": "style",
+      "via": "profiles",
+      "dominant": true
+    },
+    "profilePicture": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "likes": {
+      "collection": "like",
+      "via": "profile"
+    },
+    "type": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "listener",
+        "artist",
+        "merchant"
+      ]
+    },
+    "posts": {
+      "collection": "post",
+      "via": "profile"
+    },
+    "tracks": {
+      "collection": "track",
+      "dominant": true,
+      "via": "profiles"
+    },
+    "labels": {
+      "collection": "label",
+      "dominant": true,
+      "via": "profiles"
+    },
+    "name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "latitude": {
+      "default": "",
+      "type": "float"
+    },
+    "longitude": {
+      "default": "",
+      "type": "float"
+    },
+    "bio": {
+      "default": "",
+      "maxLength": 2000,
+      "type": "string"
+    },
+    "isPrivate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "coverPicture": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "city": {
+      "default": "",
+      "type": "string"
+    },
+    "country": {
+      "default": "",
+      "type": "string"
+    },
+    "bioShort": {
+      "default": "",
+      "maxLength": 300,
+      "type": "string"
+    },
+    "state": {
+      "default": "",
+      "type": "string"
+    },
+    "subscriptions": {
+      "collection": "profile",
+      "via": "subscribers",
+      "dominant": true
+    },
+    "subscribers": {
+      "collection": "profile",
+      "via": "subscriptions"
     }
   }
 }

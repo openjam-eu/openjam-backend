@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/profiles": {
+    "/labels": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Profile"
+                    "$ref": "#/components/schemas/Label"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "parameters": [
           {
@@ -195,7 +195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Label"
                 }
               }
             }
@@ -233,7 +233,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "requestBody": {
           "description": "",
@@ -241,14 +241,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProfile"
+                "$ref": "#/components/schemas/NewLabel"
               }
             }
           }
         }
       }
     },
-    "/profiles/count": {
+    "/labels/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -300,12 +300,12 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "parameters": []
       }
     },
-    "/profiles/{_id}": {
+    "/labels/{_id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -315,7 +315,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Label"
                 }
               }
             }
@@ -353,7 +353,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "parameters": [
           {
@@ -377,7 +377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Label"
                 }
               }
             }
@@ -415,7 +415,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "requestBody": {
           "description": "",
@@ -423,7 +423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProfile"
+                "$ref": "#/components/schemas/NewLabel"
               }
             }
           }
@@ -489,7 +489,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Label"
         ],
         "parameters": [
           {
@@ -508,223 +508,34 @@
   },
   "components": {
     "schemas": {
-      "Profile": {
+      "Label": {
         "required": [
-          "id",
-          "handle",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "handle": {
+          "name": {
             "type": "string",
             "default": ""
           },
-          "user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "profiles": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "comments": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "text": {
-                  "type": "string"
-                },
-                "by": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "post": {
-                  "type": "string"
-                },
-                "track": {
-                  "type": "string"
-                },
-                "trackAt": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "styles": {
+          "profiles": {
             "type": "array",
             "items": {
               "required": [
                 "id",
+                "handle",
                 "name"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "name": {
+                "handle": {
                   "type": "string"
                 },
-                "description": {
-                  "type": "string"
-                },
-                "profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "profilePicture": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "sha256": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "public_id": {
-                "type": "string"
-              },
-              "related": {
-                "type": "string"
-              }
-            }
-          },
-          "likes": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "intensity",
-                "emotion"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "intensity": {
-                  "type": "integer"
-                },
-                "track": {
-                  "type": "string"
-                },
-                "profile": {
-                  "type": "string"
-                },
-                "emotion": {
-                  "type": "string"
-                },
-                "post": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "type": {
-            "type": "string",
-            "default": "",
-            "enum": [
-              "listener",
-              "artist",
-              "merchant"
-            ]
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "type",
-                "content"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                },
-                "track": {
+                "user": {
                   "type": "string"
                 },
                 "comments": {
@@ -733,10 +544,79 @@
                     "type": "string"
                   }
                 },
-                "profile": {
+                "styles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "profilePicture": {
                   "type": "string"
                 },
                 "likes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tracks": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "labels": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "name": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                },
+                "bio": {
+                  "type": "string"
+                },
+                "isPrivate": {
+                  "type": "boolean"
+                },
+                "coverPicture": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "bioShort": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "subscriptions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "subscribers": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -809,374 +689,20 @@
               }
             }
           },
-          "labels": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            }
-          },
+          "description": {
+            "type": "string",
+            "default": "",
+            "maxLength": 2000
+          }
+        }
+      },
+      "NewLabel": {
+        "properties": {
           "name": {
             "type": "string",
             "default": ""
           },
-          "latitude": {
-            "type": "number",
-            "default": ""
-          },
-          "longitude": {
-            "type": "number",
-            "default": ""
-          },
-          "bio": {
-            "type": "string",
-            "default": "",
-            "maxLength": 2000
-          },
-          "isPrivate": {
-            "type": "boolean",
-            "default": false
-          },
-          "coverPicture": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "sha256": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "public_id": {
-                "type": "string"
-              },
-              "related": {
-                "type": "string"
-              }
-            }
-          },
-          "city": {
-            "type": "string",
-            "default": ""
-          },
-          "country": {
-            "type": "string",
-            "default": ""
-          },
-          "bioShort": {
-            "type": "string",
-            "default": "",
-            "maxLength": 300
-          },
-          "state": {
-            "type": "string",
-            "default": ""
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "handle",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "handle": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "styles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profilePicture": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "bio": {
-                  "type": "string"
-                },
-                "isPrivate": {
-                  "type": "boolean"
-                },
-                "coverPicture": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                },
-                "bioShort": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "subscriptions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subscribers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "subscribers": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "handle",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "handle": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "styles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profilePicture": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "bio": {
-                  "type": "string"
-                },
-                "isPrivate": {
-                  "type": "boolean"
-                },
-                "coverPicture": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                },
-                "bioShort": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "subscriptions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subscribers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "NewProfile": {
-        "required": [
-          "handle",
-          "name"
-        ],
-        "properties": {
-          "handle": {
-            "type": "string",
-            "default": ""
-          },
-          "user": {
-            "type": "string"
-          },
-          "comments": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "styles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "likes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "type": {
-            "type": "string",
-            "default": "",
-            "enum": [
-              "listener",
-              "artist",
-              "merchant"
-            ]
-          },
-          "posts": {
+          "profiles": {
             "type": "array",
             "items": {
               "type": "string"
@@ -1188,61 +714,10 @@
               "type": "string"
             }
           },
-          "labels": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "name": {
-            "type": "string",
-            "default": ""
-          },
-          "latitude": {
-            "type": "number",
-            "default": ""
-          },
-          "longitude": {
-            "type": "number",
-            "default": ""
-          },
-          "bio": {
+          "description": {
             "type": "string",
             "default": "",
             "maxLength": 2000
-          },
-          "isPrivate": {
-            "type": "boolean",
-            "default": false
-          },
-          "city": {
-            "type": "string",
-            "default": ""
-          },
-          "country": {
-            "type": "string",
-            "default": ""
-          },
-          "bioShort": {
-            "type": "string",
-            "default": "",
-            "maxLength": 300
-          },
-          "state": {
-            "type": "string",
-            "default": ""
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subscribers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       }
@@ -1250,7 +725,7 @@
   },
   "tags": [
     {
-      "name": "Profile"
+      "name": "Label"
     }
   ]
 }

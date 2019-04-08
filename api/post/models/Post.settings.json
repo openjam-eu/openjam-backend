@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "post",
+  "info": {
+    "name": "post",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "type": {
+      "default": "text",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "text",
+        "track"
+      ]
+    },
+    "content": {
+      "default": "",
+      "maxLength": 1000,
+      "type": "string",
+      "required": true
+    },
+    "track": {
+      "model": "track",
+      "via": "posts"
+    },
+    "comments": {
+      "collection": "comment",
+      "via": "post"
+    },
+    "profile": {
+      "model": "profile",
+      "via": "posts"
+    },
+    "likes": {
+      "collection": "like",
+      "via": "post"
+    }
+  }
+}

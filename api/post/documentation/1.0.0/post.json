@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/profiles": {
+    "/posts": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Profile"
+                    "$ref": "#/components/schemas/Post"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "parameters": [
           {
@@ -195,7 +195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Post"
                 }
               }
             }
@@ -233,7 +233,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "requestBody": {
           "description": "",
@@ -241,14 +241,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProfile"
+                "$ref": "#/components/schemas/NewPost"
               }
             }
           }
         }
       }
     },
-    "/profiles/count": {
+    "/posts/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -300,12 +300,12 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "parameters": []
       }
     },
-    "/profiles/{_id}": {
+    "/posts/{_id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -315,7 +315,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Post"
                 }
               }
             }
@@ -353,7 +353,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "parameters": [
           {
@@ -377,7 +377,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/Post"
                 }
               }
             }
@@ -415,7 +415,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "requestBody": {
           "description": "",
@@ -423,7 +423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewProfile"
+                "$ref": "#/components/schemas/NewPost"
               }
             }
           }
@@ -489,7 +489,7 @@
         },
         "summary": "",
         "tags": [
-          "Profile"
+          "Post"
         ],
         "parameters": [
           {
@@ -508,59 +508,87 @@
   },
   "components": {
     "schemas": {
-      "Profile": {
+      "Post": {
         "required": [
           "id",
-          "handle",
-          "name"
+          "type",
+          "content"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "handle": {
+          "type": {
             "type": "string",
-            "default": ""
+            "default": "text",
+            "enum": [
+              "text",
+              "track"
+            ]
           },
-          "user": {
+          "content": {
+            "type": "string",
+            "default": "",
+            "maxLength": 1000
+          },
+          "track": {
             "required": [
               "id",
-              "username",
-              "email"
+              "type",
+              "title",
+              "explicit"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "type": {
                 "type": "string"
               },
-              "email": {
+              "title": {
                 "type": "string"
               },
-              "provider": {
+              "edit": {
                 "type": "string"
               },
-              "password": {
-                "type": "string"
+              "likes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "profiles": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "comments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "label": {
+                "type": "string"
+              },
+              "explicit": {
+                "type": "boolean"
+              },
+              "audio": {
+                "type": "string"
+              },
+              "cover": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
               }
             }
           },
@@ -595,75 +623,105 @@
               }
             }
           },
-          "styles": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "profilePicture": {
+          "profile": {
             "required": [
               "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
+              "handle",
+              "name"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
+              "handle": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "comments": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "styles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "profilePicture": {
+                "type": "string"
+              },
+              "likes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tracks": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "name": {
                 "type": "string"
               },
-              "hash": {
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "bio": {
                 "type": "string"
               },
-              "sha256": {
+              "isPrivate": {
+                "type": "boolean"
+              },
+              "coverPicture": {
                 "type": "string"
               },
-              "ext": {
+              "city": {
                 "type": "string"
               },
-              "mime": {
+              "country": {
                 "type": "string"
               },
-              "size": {
+              "bioShort": {
                 "type": "string"
               },
-              "url": {
+              "state": {
                 "type": "string"
               },
-              "provider": {
-                "type": "string"
+              "subscriptions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "public_id": {
-                "type": "string"
-              },
-              "related": {
-                "type": "string"
+              "subscribers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -696,457 +754,29 @@
                 }
               }
             }
-          },
-          "type": {
-            "type": "string",
-            "default": "",
-            "enum": [
-              "listener",
-              "artist",
-              "merchant"
-            ]
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "type",
-                "content"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "content": {
-                  "type": "string"
-                },
-                "track": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profile": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "tracks": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "type",
-                "title",
-                "explicit"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "edit": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "label": {
-                  "type": "string"
-                },
-                "explicit": {
-                  "type": "boolean"
-                },
-                "audio": {
-                  "type": "string"
-                },
-                "cover": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "labels": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "profiles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "name": {
-            "type": "string",
-            "default": ""
-          },
-          "latitude": {
-            "type": "number",
-            "default": ""
-          },
-          "longitude": {
-            "type": "number",
-            "default": ""
-          },
-          "bio": {
-            "type": "string",
-            "default": "",
-            "maxLength": 2000
-          },
-          "isPrivate": {
-            "type": "boolean",
-            "default": false
-          },
-          "coverPicture": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "sha256": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "public_id": {
-                "type": "string"
-              },
-              "related": {
-                "type": "string"
-              }
-            }
-          },
-          "city": {
-            "type": "string",
-            "default": ""
-          },
-          "country": {
-            "type": "string",
-            "default": ""
-          },
-          "bioShort": {
-            "type": "string",
-            "default": "",
-            "maxLength": 300
-          },
-          "state": {
-            "type": "string",
-            "default": ""
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "handle",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "handle": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "styles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profilePicture": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "bio": {
-                  "type": "string"
-                },
-                "isPrivate": {
-                  "type": "boolean"
-                },
-                "coverPicture": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                },
-                "bioShort": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "subscriptions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subscribers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "subscribers": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "handle",
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "handle": {
-                  "type": "string"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "comments": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "styles": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "profilePicture": {
-                  "type": "string"
-                },
-                "likes": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "type": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tracks": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "name": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "number"
-                },
-                "longitude": {
-                  "type": "number"
-                },
-                "bio": {
-                  "type": "string"
-                },
-                "isPrivate": {
-                  "type": "boolean"
-                },
-                "coverPicture": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "country": {
-                  "type": "string"
-                },
-                "bioShort": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "subscriptions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "subscribers": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
           }
         }
       },
-      "NewProfile": {
+      "NewPost": {
         "required": [
-          "handle",
-          "name"
+          "type",
+          "content"
         ],
         "properties": {
-          "handle": {
+          "type": {
             "type": "string",
-            "default": ""
+            "default": "text",
+            "enum": [
+              "text",
+              "track"
+            ]
           },
-          "user": {
+          "content": {
+            "type": "string",
+            "default": "",
+            "maxLength": 1000
+          },
+          "track": {
             "type": "string"
           },
           "comments": {
@@ -1155,90 +785,10 @@
               "type": "string"
             }
           },
-          "styles": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "profile": {
+            "type": "string"
           },
           "likes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "type": {
-            "type": "string",
-            "default": "",
-            "enum": [
-              "listener",
-              "artist",
-              "merchant"
-            ]
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "tracks": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "labels": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "name": {
-            "type": "string",
-            "default": ""
-          },
-          "latitude": {
-            "type": "number",
-            "default": ""
-          },
-          "longitude": {
-            "type": "number",
-            "default": ""
-          },
-          "bio": {
-            "type": "string",
-            "default": "",
-            "maxLength": 2000
-          },
-          "isPrivate": {
-            "type": "boolean",
-            "default": false
-          },
-          "city": {
-            "type": "string",
-            "default": ""
-          },
-          "country": {
-            "type": "string",
-            "default": ""
-          },
-          "bioShort": {
-            "type": "string",
-            "default": "",
-            "maxLength": 300
-          },
-          "state": {
-            "type": "string",
-            "default": ""
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subscribers": {
             "type": "array",
             "items": {
               "type": "string"
@@ -1250,7 +800,7 @@
   },
   "tags": [
     {
-      "name": "Profile"
+      "name": "Post"
     }
   ]
 }

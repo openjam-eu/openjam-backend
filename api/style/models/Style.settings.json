@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "style",
+  "info": {
+    "name": "style",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "default": "",
+      "maxLength": 5000,
+      "type": "string"
+    },
+    "profiles": {
+      "collection": "profile",
+      "via": "styles"
+    }
+  }
+}

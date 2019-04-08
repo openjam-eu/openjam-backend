@@ -1,0 +1,75 @@
+{
+  "connection": "default",
+  "collectionName": "track",
+  "info": {
+    "name": "track",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "type": {
+      "default": "original",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "original",
+        "remix"
+      ]
+    },
+    "title": {
+      "default": "",
+      "maxLength": 50,
+      "minLength": 2,
+      "type": "string",
+      "required": true
+    },
+    "edit": {
+      "default": "",
+      "maxLength": 50,
+      "type": "string"
+    },
+    "likes": {
+      "collection": "like",
+      "via": "track"
+    },
+    "posts": {
+      "collection": "post",
+      "via": "track"
+    },
+    "profiles": {
+      "collection": "profile",
+      "via": "tracks"
+    },
+    "comments": {
+      "collection": "comment",
+      "via": "track"
+    },
+    "label": {
+      "model": "label",
+      "via": "tracks"
+    },
+    "explicit": {
+      "default": false,
+      "type": "boolean",
+      "required": true
+    },
+    "audio": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}
